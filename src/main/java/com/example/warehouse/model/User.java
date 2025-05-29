@@ -18,26 +18,26 @@ import java.time.Instant;
 public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, updatable = false)
     private String userId;
 
-    @Column(name = "username")
+    @Column(name = "username",nullable = false)
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     private String password;
 
-    @Column(name = "user_role")
+    @Column(name = "user_role",nullable = false, updatable = false )
     private UserRole userRole;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at",nullable = false,updatable = false)
     @CreatedDate
     private Instant createdAt;
 
-    @Column(name = "modifed_at")
+    @Column(name = "modifed_at",nullable = false)
     @LastModifiedDate
     private Instant lastModifiedAt;
 }

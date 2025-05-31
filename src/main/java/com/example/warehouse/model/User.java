@@ -16,7 +16,6 @@ import java.time.Instant;
 @Table(name = "users")
 @Setter
 @Getter
-@ToString
 public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id

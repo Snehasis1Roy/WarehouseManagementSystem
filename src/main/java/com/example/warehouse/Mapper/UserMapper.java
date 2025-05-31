@@ -1,6 +1,7 @@
 package com.example.warehouse.Mapper;
 
 import com.example.warehouse.dto.request.UserRegistationRequest;
+import com.example.warehouse.dto.request.UserRequest;
 import com.example.warehouse.dto.response.UserResponse;
 import com.example.warehouse.model.User;
 import org.springframework.stereotype.Component;
@@ -26,5 +27,11 @@ public class UserMapper {
                 user.getCreatedAt().toEpochMilli(),
                 user.getLastModifiedAt().toEpochMilli()
         );
+    }
+    public  User userRequestToEntity(UserRequest userRequest, User user){
+        user.setUsername(userRequest.username());
+        user.setEmail(userRequest.email());
+        user.setPassword(userRequest.password());
+        return user;
     }
 }

@@ -15,11 +15,15 @@ import java.util.List;
 @Table(name = "warehouse")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Warehouse {
+
     @OneToMany(mappedBy = "warehouse")
     private List<Admin> admin;
 
     @OneToMany(mappedBy = "warehouse")
     private List<Staff> staff;
+
+    @OneToMany(mappedBy = "warehouse")
+    private List<Rooms> rooms;
 
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id

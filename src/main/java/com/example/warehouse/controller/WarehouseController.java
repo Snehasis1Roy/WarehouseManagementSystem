@@ -8,6 +8,7 @@ import com.example.warehouse.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WarehouseController {
     @Autowired
     private WareHouseService service;
-
+@PreAuthorize("hasAuthority('ADMIN')")
 @PostMapping("/warehouse/{userId}")
     public ResponseEntity<ResponseStructure<WarehouseResponse>>registerWarehouse(@RequestBody WarehouseRequest warehouseRequest ,@PathVariable String userId){
     WarehouseResponse res=service.addWarehouse(warehouseRequest,userId);

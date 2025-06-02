@@ -19,21 +19,20 @@ public class UserController {
     private UserServiceImp userService;
 
 
-    @PostMapping("/users")
+    @PostMapping("/register")
     public ResponseEntity<ResponseStructure<UserResponse>> creastingNewUser(@RequestBody UserRegistationRequest userRegistationRequest){
-
         UserResponse us = userService.CreateNewUser(userRegistationRequest);
         ResponseStructure<UserResponse> responseStructure= new ResponseStructure<>(HttpStatus.CREATED.value(),"User created",us);
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure, HttpStatus.CREATED);
     }
-    @PutMapping("/users")
+    @PutMapping("/profile")
     public ResponseEntity<ResponseStructure<UserResponse>> UpdatingUser(@RequestBody UserRequest userRequest){
         UserResponse us = userService.UpdateExistingUser(userRequest);
         ResponseStructure<UserResponse>responseStructure= new ResponseStructure<>(HttpStatus.CREATED.value(),"Updation is successfully complited",us);
         return  new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.CREATED);
 
     }
-    @GetMapping("/findId")
+    @GetMapping("/profile")
     public ResponseEntity<ResponseStructure<UserResponse>>findById(){
         UserResponse us=userService.findById();
         ResponseStructure<UserResponse>responseStructure=new ResponseStructure<>(HttpStatus.FOUND.value(), "User Found Successfully",us);

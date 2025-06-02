@@ -20,7 +20,7 @@ public class SecurityCofig {
 
         //Authencate the end point as public or private
         //role base access .requestMatchers(""/warehouse).hasAuthority(UserRole.Admin.name())
-        http.authorizeHttpRequests(auth->auth.requestMatchers("/users")
+        http.authorizeHttpRequests(auth->auth.requestMatchers("/register")
                 .permitAll().anyRequest().authenticated());
 
              //type of atthentication to be use [httpBasic,FormLogin,AuthOlogin]

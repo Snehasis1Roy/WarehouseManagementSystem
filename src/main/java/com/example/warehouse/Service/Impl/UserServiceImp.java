@@ -30,13 +30,17 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserResponse CreateNewUser(UserRegistationRequest userRegistationRequest) {
+//        check if email is valid or not
+//        check if password meets condition or not ex length>8 or alphanumeric
+//        if user exist in DB or not
+//        password hashing
         log.debug("Registering user {}, is-email-present: {}", userRegistationRequest.email(), userRegistationRequest.email()!=null);
         User user = switch (userRegistationRequest.userRole()){
             case ADMIN -> userMapper.userToEntity(userRegistationRequest,new Admin());
             case STAFF -> userMapper.userToEntity(userRegistationRequest,new Staff());
             default -> throw new UserRoleNotValidException("Unsupported user role!!");
         };
-
+// TODO:add business logic user exist in database
         if (user != null) {
             log.debug("Resolved user '{}', with role '{}' ", user.getEmail(), user.getUserRole());
             String password=passwordEncoder.encode(user.getPassword());

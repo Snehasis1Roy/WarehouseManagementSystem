@@ -18,8 +18,12 @@ public class Block {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     private String blockId;
+    @Column(name = "blockType",nullable = false,updatable = false)
     private BlockType blockType;
+    @Column(name = "length",nullable = false)
     private double length;
+    @Column(name = "bredth",nullable = false)
     private double bredth;
+    @Column(name = "height",nullable = false)
     private double height;
 }

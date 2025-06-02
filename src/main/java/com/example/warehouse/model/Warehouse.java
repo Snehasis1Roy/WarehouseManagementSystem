@@ -41,4 +41,5 @@ public class Warehouse {
 
     @Column(name = "landmark",nullable = false)
     private String landmark;
+
 }

@@ -14,6 +14,7 @@ import java.time.Instant;
 @Setter
 @Table(name = "inbound_shipment")
 @EntityListeners(AuditingEntityListener.class)
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class InboundShipment {
     @Id
@@ -21,40 +22,26 @@ public class InboundShipment {
     @Column(name = "shipmentId",nullable = false,updatable = false)
     private  String shipmentId;
 
-    @Column(name = "productTitle",nullable = false,updatable = false)
-    private  String productTitle;
-
-    @Column(name ="productWeight",nullable = false)
-    private  double productWeight;
-
-    @Column(name = "productLength",nullable = false)
-    private  double productLength;
-
-    @Column(name="productBreadth",nullable = false)
-    private  double productBreadth;
-
-    @Column(name = "materialType",nullable = false)
-    private  String materialType;
-
-    @Column(name = "careInstruction",nullable = false)
-    private  String careInstruction;
-
-    @Column(name = "quantity",nullable = false)
-    private  int quantity;
-
-    @Column(name = "productPrice",nullable = false)
-    private double productPrice;
-
-    @Column(name ="customerId",nullable = false,updatable = false)
-    private String customerId;
+    @Column(name ="sellerId",nullable = false,updatable = false)
+    private String SellerId;
 
     @CreatedDate
     @Column(name = "createdAt",nullable = false,updatable = false)
     private Instant createdAt;
+
     @Column(name = "status",nullable = false)
     private ShipmentStatus status;
+
+    @Column(name = "quantity",nullable = false)
+    private int quantity;
+
     @ManyToOne
+    @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 
 

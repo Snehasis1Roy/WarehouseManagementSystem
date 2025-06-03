@@ -5,9 +5,9 @@ public record ProductResponse(
         double weight,
         double height,
         double length,
-        String materialType,
-        int quantity,
-        double productPrice,
-        String careInstruction
+        String material,
+        double price,
+        String careInstruction,
+        double breadth
 ) {
 }

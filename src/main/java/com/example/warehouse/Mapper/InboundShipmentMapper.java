@@ -1,44 +1,59 @@
 package com.example.warehouse.Mapper;
 
 import com.example.warehouse.dto.request.InboundShipmentRequest;
+import com.example.warehouse.dto.request.ProductRequest;
 import com.example.warehouse.dto.response.InboundShipmentResponse;
+import com.example.warehouse.dto.response.ProductResponse;
 import com.example.warehouse.model.InboundShipment;
+import com.example.warehouse.model.Product;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InboundShipmentMapper {
 
     public InboundShipment toEntity(InboundShipmentRequest source, InboundShipment target) {
-        target.setCustomerId(source.customerId());
+        Product product = productToEntity(source.product());
+        target.setSellerId(source.sellerId());
+        target.setProduct(product);
         target.setStatus(source.status());
-        if (source.product() != null) {
-            target.setProductTitle(source.product().title());
-            target.setProductWeight(source.product().weight());
-            target.setProductLength(source.product().length());
-            target.setProductBreadth(source.product().bredth());
-            target.setMaterialType(source.product().materialType());
-            target.setCareInstruction(source.product().careinstruction());
-            target.setQuantity(source.product().Quantity());
-            target.setProductPrice(source.product().productPrice());
-        }
+        target.setQuantity(source.quantity());
+
         return target;
     }
 
     public InboundShipmentResponse toResponse(InboundShipment inboundShipment) {
         return new InboundShipmentResponse(
-            inboundShipment.getShipmentId(),
-            new com.example.warehouse.dto.response.ProductResponse(
-                inboundShipment.getProductTitle(),
-                inboundShipment.getProductWeight(),
-                inboundShipment.getProductLength(),
-                inboundShipment.getProductBreadth(),
-                inboundShipment.getMaterialType(),
-                inboundShipment.getQuantity(),
-                inboundShipment.getProductPrice(),
-                inboundShipment.getCareInstruction()
-            ),
-            inboundShipment.getCustomerId(),
-            inboundShipment.getStatus()
+                inboundShipment.getShipmentId(),
+                inboundShipment.getProduct(),
+                inboundShipment.getSellerId(),
+                inboundShipment.getStatus(),
+                inboundShipment.getQuantity()
+        );
+    }
+    public Product productToEntity(ProductRequest request) {
+        Product product = new Product();
+        product.setProductId(request.productId());
+        product.setTitle(request.title());
+        product.setPrice(request.price());
+        product.setMaterial(request.material());
+        product.setLength(request.length());
+        product.setCareInstruction(request.careInstruction());
+        product.setBreadth(request.breadth());
+        product.setHeight(request.height());
+        product.setWeight(request.weight());
+        return product;
+    }
+
+    public ProductResponse productToResponse(Product product) {
+        return new ProductResponse(
+                product.getTitle(),
+                product.getWeight(),
+                product.getHeight(),
+                product.getLength(),
+                product.getMaterial(),
+                product.getPrice(),
+                product.getCareInstruction(),
+                product.getBreadth()
         );
     }
 }

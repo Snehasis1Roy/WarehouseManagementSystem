@@ -17,23 +17,24 @@ public class UserController {
 
     @Autowired
     private UserServiceImp userService;
+
+
     @PostMapping("/register")
     public ResponseEntity<ResponseStructure<UserResponse>> creastingNewUser(@RequestBody UserRegistationRequest userRegistationRequest){
-
         UserResponse us = userService.CreateNewUser(userRegistationRequest);
         ResponseStructure<UserResponse> responseStructure= new ResponseStructure<>(HttpStatus.CREATED.value(),"User created",us);
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure, HttpStatus.CREATED);
     }
-    @PutMapping("/users/{userId}")
-    public ResponseEntity<ResponseStructure<UserResponse>> UpdatingUser(@RequestBody UserRequest userRequest,@PathVariable String userId){
-        UserResponse us = userService.UpdateExistingUser(userRequest,userId);
+    @PutMapping("/profile")
+    public ResponseEntity<ResponseStructure<UserResponse>> UpdatingUser(@RequestBody UserRequest userRequest){
+        UserResponse us = userService.UpdateExistingUser(userRequest);
         ResponseStructure<UserResponse>responseStructure= new ResponseStructure<>(HttpStatus.CREATED.value(),"Updation is successfully complited",us);
         return  new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.CREATED);
 
     }
-    @GetMapping("/findId/{userId}")
-    public ResponseEntity<ResponseStructure<UserResponse>>findById(@PathVariable String userId){
-        UserResponse us=userService.findById(userId);
+    @GetMapping("/profile")
+    public ResponseEntity<ResponseStructure<UserResponse>>findById(){
+        UserResponse us=userService.findById();
         ResponseStructure<UserResponse>responseStructure=new ResponseStructure<>(HttpStatus.FOUND.value(), "User Found Successfully",us);
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.FOUND);
     }
